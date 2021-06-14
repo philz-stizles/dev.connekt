@@ -11,12 +11,13 @@ import './index.css';
 import { GithubContextProvider } from './context/githubContext';
 
 require('dotenv').config();
-// console.log('Index', process.env.REACT_APP_AUTH0_DOMAIN);
+console.log('Index', process.env.REACT_APP_AUTH0_DOMAIN);
+console.log('Index', process.env.REACT_APP_AUTH0_CLIENT_ID);
 ReactDOM.render(
   <Auth0Provider
     domain={process.env.REACT_APP_AUTH0_DOMAIN}
     clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
-    redirectUri={'http://localhost:3000/dashboard'}
+    redirectUri={process.env.REACT_APP_AUTH0_REDIRECT_URI}
     // redirectUri={window.location.origin}
     cacheLocation="localstorage" // Add this option if you will be using social login to persist auth across pages
   >
