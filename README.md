@@ -29,6 +29,14 @@ Go to [React Icons](https://react-icons.github.io/react-icons/) for more informa
 [ npm install fusioncharts react-fusioncharts --save | yarn add fusioncharts react-fusioncharts ]
 Go to [Fusion Config Documentation](https://www.fusioncharts.com/dev/chart-guide/list-of-charts)
 
+### Routing
+
+Go to [Fusion Config Documentation](https://www.fusioncharts.com/dev/chart-guide/list-of-charts)
+Install: [ npm install react-router-dom --save | yarn add react-router-dom ]
+Features:
+Sidebar Routing
+Nested Routing
+
 ### `yarn eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
@@ -56,3 +64,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+// https://github.com/bradtraversy/devconnector_2.0
+// npm install express express-validator bcryptjs config gravatar jsonwebtoken mongoose request uuid
+// npm install --save-dev nodemon concurrently
