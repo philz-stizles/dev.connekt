@@ -9,26 +9,35 @@ const Repos = () => {
 
   // STEP 2 - Chart Data
   let languages = githubUserRepos.reduce((acc, repo) => {
-    const { language } = repo;
+    const { language, stargazers_count } = repo;
     if (!language) return acc;
     if (!acc[language]) {
-      acc[language] = { label: language, value: 1 };
+      acc[language] = { label: language, value: 1, stars: stargazers_count };
     } else {
-      acc[language] = { ...acc[language], value: acc[language].value + 1 };
+      acc[language] = {
+        ...acc[language],
+        value: acc[language].value + 1,
+        stars: acc[language].stars + stargazers_count,
+      };
     }
 
     return acc;
   }, {});
 
-  languages = Object.values(languages)
+  const mostUsed = Object.values(languages)
     .sort((a, b) => b.value - a.value)
+    .slice(0, 5);
+
+  const mostPopular = Object.values(languages)
+    .sort((a, b) => b.stars - a.stars)
+    .map((item) => ({ ...item, value: item.stars }))
     .slice(0, 5);
 
   return (
     <ReposWrapper>
       {/*<ExampleChart data={chartData} /> */}
-      <Pie2D data={languages} />
-      <Doughnut2D data={languages} />
+      <Pie2D data={mostUsed} />
+      <Doughnut2D data={mostPopular} />
     </ReposWrapper>
   );
 };
