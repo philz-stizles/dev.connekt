@@ -13,6 +13,7 @@ import { GithubContextProvider } from './context/githubContext';
 require('dotenv').config();
 console.log('Index', process.env.REACT_APP_AUTH0_DOMAIN);
 console.log('Index', process.env.REACT_APP_AUTH0_CLIENT_ID);
+console.log('Index', process.env.REACT_APP_AUTH0_REDIRECT_URI);
 ReactDOM.render(
   <Auth0Provider
     domain={process.env.REACT_APP_AUTH0_DOMAIN}
