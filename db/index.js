@@ -3,7 +3,7 @@ const config = require('config');
 
 const db = config.get('mongoURI');
 
-console.log('MONOGO DB SERVER', db);
+console.log('MONOGO SERVER', db);
 
 const connectDB = async () => {
   try {
