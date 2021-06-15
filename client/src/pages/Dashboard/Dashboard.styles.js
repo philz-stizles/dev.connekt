@@ -48,3 +48,7 @@ export const DashboardWrapper = styled.section`
     }
   }
 `;
+
+export const ContentWrapper = styled.section`
+  padding: 3rem;
+`;

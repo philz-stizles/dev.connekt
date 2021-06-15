@@ -42,6 +42,10 @@ const Main = () => {
     },
   ];
 
+  // if (githubContext.isLoading) {
+  //   return;
+  // }
+
   return (
     <div>
       <section className="stat-grid">

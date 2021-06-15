@@ -18,6 +18,7 @@ export const NavWrapper = styled.nav`
     flex: 1;
     display: flex;
     justify-content: center;
+    align-items: center;
 
     input[type='search'] {
       background: #292929;

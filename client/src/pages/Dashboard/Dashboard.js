@@ -11,9 +11,8 @@ import {
 } from 'react-icons/ai';
 import { MdPermContactCalendar } from 'react-icons/md';
 import Nav from '../../components/Nav/Nav';
-import { DashboardWrapper } from './Dashboard.styles';
 import SideNav from '../../components/SideNav/SideNav';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setActiveMenuItem } from '../../redux/sidebar/sidebarActions';
 import { Route, Switch } from 'react-router-dom';
 
@@ -26,6 +25,9 @@ import QuizBuilder from './pages/QuizBuilder/QuizBuilder';
 import StockPhotos from './pages/StockPhotos/StockPhotos';
 import Projects from './pages/Projects/Projects';
 
+// Styled Components
+import { DashboardWrapper, ContentWrapper } from './Dashboard.styles';
+
 const menuBlueprint = [
   {
     id: 'mng',
@@ -34,6 +36,11 @@ const menuBlueprint = [
         id: '/dashboard',
         icon: <GoDashboard />,
         text: 'Dashboard',
+      },
+      {
+        id: '/dashboard/developers',
+        icon: <MdPermContactCalendar />,
+        text: ' Developers',
       },
       {
         id: '/dashboard/contact',
@@ -80,39 +87,31 @@ const menuBlueprint = [
   },
 ];
 
-const Dashboard = (props) => {
-  const { activeMenuItem } = useSelector((state) => state.sidebar);
-  const dispatch = useDispatch();
-  let mainContent;
-
-  React.useEffect(() => {
-    const stringifiedActiveMenuItem = localStorage.getItem('activeMenuItem');
-    if (stringifiedActiveMenuItem) {
-      const parsedActiveMenuItem = JSON.parse(stringifiedActiveMenuItem);
-      if (parsedActiveMenuItem) {
-        dispatch(setActiveMenuItem(parsedActiveMenuItem));
-      } else {
-        dispatch(setActiveMenuItem(['/dashboard/dashboard']));
-      }
-    } else {
-      dispatch(setActiveMenuItem(['/dashboard/dashboard']));
-    }
-  }, []);
-
+const Dashboard = () => {
   return (
     <DashboardWrapper>
       <Nav />
       <main>
         <SideNav menuBlueprint={menuBlueprint} />
-        <Switch>
-          <Route exact path="/dashboard" component={Main} />
-          <Route exact path="/dashboard/contact" component={Contact} />
-          <Route exact path="/dashboard/experience" component={Experience} />
-          <Route exact path="/dashboard/education" component={Education} />
-          <Route exact path="/dashboard/projects" component={Projects} />
-          <Route exact path="/dashboard/quiz-builder" component={QuizBuilder} />
-          <Route exact path="/dashboard/stock-photos" component={StockPhotos} />
-        </Switch>
+        <ContentWrapper>
+          <Switch>
+            <Route exact path="/dashboard" component={Main} />
+            <Route exact path="/dashboard/contact" component={Contact} />
+            <Route exact path="/dashboard/experience" component={Experience} />
+            <Route exact path="/dashboard/education" component={Education} />
+            <Route exact path="/dashboard/projects" component={Projects} />
+            <Route
+              exact
+              path="/dashboard/quiz-builder"
+              component={QuizBuilder}
+            />
+            <Route
+              exact
+              path="/dashboard/stock-photos"
+              component={StockPhotos}
+            />
+          </Switch>
+        </ContentWrapper>
       </main>
     </DashboardWrapper>
   );

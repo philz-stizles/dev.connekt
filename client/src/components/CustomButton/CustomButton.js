@@ -21,6 +21,7 @@ const CustomButton = ({ children, link, onClick, size, outlined, loading }) => {
 
 const CustomButtonWrapper = styled.div`
   display: inline-block;
+  margin-right: 1rem;
 
   a,
   button {

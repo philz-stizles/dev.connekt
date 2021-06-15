@@ -1,7 +1,7 @@
 import React from 'react';
-import { Fragment } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { CustomInput } from '..';
+import styled from 'styled-components';
+import { CustomButton, CustomInput } from '..';
 import { addExperience } from '../../redux/profile/profileActions';
 
 const ExperienceForm = ({ initialState }) => {
@@ -26,12 +26,12 @@ const ExperienceForm = ({ initialState }) => {
 
     setFormData({
       ...formData,
-      [name]: name === 'current' ? !value : value,
+      [name]: name === 'current' ? !current : value,
     });
   };
 
   return (
-    <Fragment>
+    <FormWrapper>
       <h1 className="large text-primary">Add An Experience</h1>
       <p className="lead">
         <i className="fas fa-code-branch" /> Add any developer/programming
@@ -72,39 +72,31 @@ const ExperienceForm = ({ initialState }) => {
           onChange={handleInputChange}
         />
 
-        <div className="form-group">
-          <h4>From Date</h4>
-          <input
-            type="date"
-            name="from"
-            value={from}
-            onChange={handleInputChange}
-          />
-        </div>
+        <CustomInput
+          label="From Date"
+          type="date"
+          name="from"
+          value={from}
+          onChange={handleInputChange}
+        />
 
-        <div className="form-group">
-          <p>
-            <input
-              type="checkbox"
-              name="current"
-              checked={current}
-              value={current}
-              onChange={handleInputChange}
-            />{' '}
-            Current Job
-          </p>
-        </div>
+        <CustomInput
+          label="Current Job"
+          type="checkbox"
+          name="current"
+          checked={current}
+          value={current}
+          onChange={handleInputChange}
+        />
 
-        <div className="form-group">
-          <h4>To Date</h4>
-          <input
-            type="date"
-            name="to"
-            value={to}
-            onChange={handleInputChange}
-            disabled={current}
-          />
-        </div>
+        <CustomInput
+          label="To Date"
+          type="date"
+          name="to"
+          value={to}
+          onChange={handleInputChange}
+          disabled={current}
+        />
 
         <CustomInput
           type="textarea"
@@ -116,13 +108,15 @@ const ExperienceForm = ({ initialState }) => {
           onChange={handleInputChange}
         />
 
-        <input type="submit" className="btn btn-primary my-1" />
-        <Link className="btn btn-light my-1" to="/dashboard">
-          Go Back
-        </Link>
+        <CustomButton>Submit</CustomButton>
+        <CustomButton outlined>Go back</CustomButton>
       </form>
-    </Fragment>
+    </FormWrapper>
   );
 };
+
+const FormWrapper = styled.div`
+  padding: 3rem;
+`;
 
 export default ExperienceForm;
