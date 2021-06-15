@@ -1,25 +1,24 @@
 import React from 'react';
-import { Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
 // Redux actions
 import { useDispatch } from 'react-redux';
-import { addEducation } from './../../store/actions/profileActions';
+import { addEducation } from './../../redux/profile/profileActions';
 
 // Custom components
-import { CustomInput } from '..';
+import { CustomButton, CustomInput } from '..';
+import styled from 'styled-components';
 
-const EducationForm = ({ initialState }) => {
+const EducationForm = ({ initialState, onClick }) => {
   const [formData, setFormData] = React.useState(
     initialState || {
-      school: '',
-      degree: '',
-      fieldOfStudy: '',
+      school: 'Obafemi Awolowo University',
+      degree: 'M sc',
+      fieldOfStudy: 'Tech management',
       from: '',
       to: '',
       current: false,
-      description: '',
+      description: '3 year tech training',
     }
   );
   const history = useHistory();
@@ -32,12 +31,12 @@ const EducationForm = ({ initialState }) => {
 
     setFormData({
       ...formData,
-      [name]: name === 'current' ? !value : value,
+      [name]: name === 'current' ? !current : value,
     });
   };
 
   return (
-    <Fragment>
+    <FormWrapper>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -70,39 +69,31 @@ const EducationForm = ({ initialState }) => {
           onChange={handleInputChange}
         />
 
-        <div className="input-wrapper">
-          <h4>From Date</h4>
-          <input
-            type="date"
-            name="from"
-            value={from}
-            onChange={handleInputChange}
-          />
-        </div>
+        <CustomInput
+          label="From Date"
+          type="date"
+          name="from"
+          value={from}
+          onChange={handleInputChange}
+        />
 
-        <div className="input-wrapper">
-          <p>
-            <input
-              type="checkbox"
-              name="current"
-              checked={current}
-              value={current}
-              onChange={handleInputChange}
-            />{' '}
-            Current School
-          </p>
-        </div>
+        <CustomInput
+          label="Current School"
+          type="checkbox"
+          name="current"
+          checked={current}
+          value={current}
+          onChange={handleInputChange}
+        />
 
-        <div className="input-wrapper">
-          <h4>To Date</h4>
-          <input
-            type="date"
-            name="to"
-            value={to}
-            onChange={handleInputChange}
-            disabled={current}
-          />
-        </div>
+        <CustomInput
+          label="To Date"
+          type="date"
+          name="to"
+          value={to}
+          onChange={handleInputChange}
+          disabled={current}
+        />
 
         <CustomInput
           type="textarea"
@@ -114,13 +105,19 @@ const EducationForm = ({ initialState }) => {
           onChange={handleInputChange}
         />
 
-        <input type="submit" className="btn btn-primary my-1" />
-        <Link className="btn btn-light my-1" to="/dashboard">
-          Go Back
-        </Link>
+        <CustomButton>Submit</CustomButton>
+        <CustomButton outlined onClick={onClick}>
+          Go back
+        </CustomButton>
       </form>
-    </Fragment>
+    </FormWrapper>
   );
 };
+
+const FormWrapper = styled.div`
+  padding: 3rem;
+  background: #fff;
+  box-shadow: 0 2px 4px 0 hsla(198, 45%, 10%, 0.12);
+`;
 
 export default EducationForm;

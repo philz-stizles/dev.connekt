@@ -8,11 +8,13 @@ import ErrorPage from './pages/Error/Error';
 import HomePage from './pages/Home/Home';
 import PrivateRoute from './routes/PrivateRoute';
 import Auth0Wrapper from './components/Auth/Auth0Wrapper';
+import { Alert } from './components';
 
 const App = () => {
   return (
     <Auth0Wrapper>
       <Router>
+        <Alert />
         <Switch>
           <Route path="/" exact={true}>
             <HomePage />

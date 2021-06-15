@@ -4,8 +4,10 @@ import { NavWrapper } from './Nav.styles';
 import { default as DefaultAvatar } from '../../assets/images/avatar.svg';
 import LogoutButton from '../Auth/LogoutButton';
 import { Link } from 'react-router-dom';
+import { GithubContext } from '../../context/githubContext';
 
 const Nav = (props) => {
+  const githubContext = React.useContext(GithubContext);
   const { isAuthenticated, user } = useAuth0();
   const isUser = isAuthenticated && user;
   return (
@@ -17,6 +19,7 @@ const Nav = (props) => {
       </div>
       <div className="search">
         <input type="search" placeholder="Search" />
+        Requests: {githubContext.githubRateLimit} / 60
       </div>
       <div className="user">
         <div className="user__details">

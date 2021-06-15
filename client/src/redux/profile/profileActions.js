@@ -8,7 +8,7 @@ import {
   CLEAR_PROFILE,
 } from '../types';
 import axios from 'axios';
-import { setAlert } from './alertActions';
+import { setAlert } from './../alert/alertActions';
 
 export const getLoggedInUserProfile = () => async (dispatch) => {
   try {
@@ -78,7 +78,9 @@ export const createOrEditProfile =
     }
   };
 
-// Manage Education
+// ****************************************
+// MANAGE EDUCATION - CRUD
+// ****************************************
 export const addEducation = (formData, history) => async (dispatch) => {
   try {
     const config = {
