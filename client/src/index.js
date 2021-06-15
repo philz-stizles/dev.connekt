@@ -21,6 +21,7 @@ ReactDOM.render(
     redirectUri={process.env.REACT_APP_AUTH0_REDIRECT_URI}
     // redirectUri={window.location.origin}
     cacheLocation="localstorage" // Add this option if you will be using social login to persist auth across pages
+    audience={process.env.REACT_APP_AUTH0_AUDIENCE}
   >
     <ReduxProvider store={store}>
       <GithubContextProvider>

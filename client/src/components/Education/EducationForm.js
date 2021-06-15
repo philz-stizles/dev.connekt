@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 // Redux actions
 import { useDispatch } from 'react-redux';
@@ -10,6 +11,7 @@ import { CustomButton, CustomInput } from '..';
 import styled from 'styled-components';
 
 const EducationForm = ({ initialState, onClick }) => {
+  const { getAccessTokenSilently } = useAuth0();
   const [formData, setFormData] = React.useState(
     initialState || {
       school: 'Obafemi Awolowo University',
@@ -35,14 +37,15 @@ const EducationForm = ({ initialState, onClick }) => {
     });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    dispatch(addEducation(getAccessTokenSilently, formData, history));
+  };
+
   return (
     <FormWrapper>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          dispatch(addEducation(formData, history));
-        }}
-      >
+      <form onSubmit={handleSubmit}>
         <CustomInput
           type="text"
           placeholder="* School or Bootcamp"

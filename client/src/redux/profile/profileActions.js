@@ -81,46 +81,52 @@ export const createOrEditProfile =
 // ****************************************
 // MANAGE EDUCATION - CRUD
 // ****************************************
-export const addEducation = (formData, history) => async (dispatch) => {
-  try {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    };
+export const addEducation =
+  (getAccessTokenSilently, formData, history) => async (dispatch) => {
+    try {
+      const token = await getAccessTokenSilently({
+        scope: 'create:education',
+      });
 
-    const response = await axios.put(
-      '/api/profile/me/education',
-      formData,
-      config
-    );
-    console.log(response.data);
-    dispatch({
-      type: UPDATE_PROFILE,
-      payload: response.data.data,
-    });
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      };
 
-    dispatch(setAlert('success', response.data.message));
+      const response = await axios.put(
+        '/api/profile/me/education',
+        formData,
+        config
+      );
+      console.log(response.data);
+      dispatch({
+        type: UPDATE_PROFILE,
+        payload: response.data.data,
+      });
 
-    history.push('/dashboard');
-  } catch (error) {
-    console.log(error.response);
+      dispatch(setAlert('success', response.data.message));
 
-    const errors = error.response.data.data;
-    if (errors) {
-      errors.forEach((error) => dispatch(setAlert('danger', error.msg)));
+      history.push('/dashboard');
+    } catch (error) {
+      console.log(error);
+
+      const errors = error.response.data.data;
+      if (errors) {
+        errors.forEach((error) => dispatch(setAlert('danger', error.msg)));
+      }
+
+      dispatch({
+        type: PROFILE_ERROR,
+        payload: {
+          message: error.response.data.message,
+          statusText: error.response.statusText,
+          status: error.response.status,
+        },
+      });
     }
-
-    dispatch({
-      type: PROFILE_ERROR,
-      payload: {
-        message: error.response.data.message,
-        statusText: error.response.statusText,
-        status: error.response.status,
-      },
-    });
-  }
-};
+  };
 
 export const deleteEducation = (id) => async (dispatch) => {
   try {
