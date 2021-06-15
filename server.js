@@ -1,8 +1,24 @@
 require('dotenv').config();
 const express = require('express');
 const connectDB = require('./db');
-const { verifyJWTToken } = require('./middlewares/authMiddleware');
+// const jwt = require('express-jwt');
+// const jwks = require('jwks-rsa');
 const path = require('path');
+const { jwtCheck } = require('./middlewares/auth0Middleware');
+
+// const jwtCheck = jwt({
+//   secret: jwks.expressJwtSecret({
+//     cache: true,
+//     rateLimit: true,
+//     jwksRequestsPerMinute: 5,
+//     jwksUri: 'https://devdezyn.eu.auth0.com/.well-known/jwks.json',
+//   }),
+//   audience: 'https://devconneckt/api',
+//   issuer: 'https://devdezyn.eu.auth0.com/',
+//   algorithms: ['RS256'],
+// });
+
+// app.use(jwtCheck);
 
 const app = express();
 
@@ -14,7 +30,7 @@ app.use(express.json({ extended: false }));
 // Routes
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/profile', require('./routes/api/profile'));
-app.use('/api/posts', verifyJWTToken, require('./routes/api/posts'));
+app.use('/api/posts', jwtCheck, require('./routes/api/posts'));
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {

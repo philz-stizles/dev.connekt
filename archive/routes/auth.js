@@ -5,7 +5,7 @@ const {
   login,
   getLoggedInUser,
 } = require('../../controllers/authControllers');
-const { verifyJWTToken } = require('../middlewares/authMiddleware');
+const { verifyJWTToken } = require('../../middlewares/authMiddleware');
 
 const router = express.Router();
 
