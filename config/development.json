@@ -1,4 +1,4 @@
 {
-  "mongoURI": "mongodb://localhost:27017/devconnektDevDb",
+  "mongoURI": "mongodb://localhost:27017/devconnektDevDbDevelopment",
   "jwtSecret": "my-very-long-secret-token"
 }
