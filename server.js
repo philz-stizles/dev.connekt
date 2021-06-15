@@ -12,9 +12,7 @@ connectDB();
 app.use(express.json({ extended: false }));
 
 // Routes
-app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/users', require('./routes/api/users'));
-// app.use('/api/contacts', require('./routes/api/contacts'));
 app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/posts', verifyJWTToken, require('./routes/api/posts'));
 
